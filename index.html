@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>即時互動數位白板V3.1</title>
+    <title>即時互動數位白板V3.1(icon更新版)</title>
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,6 +20,9 @@
 
     <!-- jsPDF for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         /* Custom styles */
@@ -209,17 +212,17 @@
         <div id="toolbar" class="toolbar fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-800 bg-opacity-90 backdrop-blur-sm text-white p-2 rounded-xl shadow-lg flex flex-nowrap items-center space-x-1 z-20">
             <!-- Basic Tools -->
             <button class="tool-btn p-3 rounded-lg hover:bg-gray-700" data-tool="pan" title="移動畫布 (H)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V6l-5 5 5 5v-5h6v5l5-5-5-5v5H9z"/></svg>
+                <i class="fas fa-arrows-up-down-left-right" style="font-size: 24px;"></i>
             </button>
             <button class="tool-btn p-3 rounded-lg hover:bg-gray-700" data-tool="select" title="選取/移動 (V)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+                <i class="fas fa-mouse-pointer" style="font-size: 24px;"></i>
             </button>
             <button class="tool-btn p-3 rounded-lg hover:bg-gray-700" data-tool="pen" title="畫筆 (P)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                <i class="fas fa-pencil-alt" style="font-size: 24px;"></i>
             </button>
             <div class="relative">
                 <button class="tool-btn p-3 rounded-lg hover:bg-gray-700" id="shapes-btn" title="圖形 (S)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+                    <i class="fas fa-shapes" style="font-size: 24px;"></i>
                 </button>
                 <div id="shape-options" class="hidden absolute bottom-full mb-2 bg-gray-800 bg-opacity-90 backdrop-blur-sm rounded-lg p-1 flex flex-col space-y-1">
                     <button class="shape-btn p-2 rounded-lg hover:bg-gray-600" data-tool="arrow" title="箭頭">
@@ -244,7 +247,7 @@
 
             <!-- Content Tools -->
             <button class="tool-btn p-3 rounded-lg hover:bg-gray-700" data-tool="note" title="便利貼 (N)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"/><path d="M15 3v6h6"/></svg>
+                <i class="fas fa-sticky-note" style="font-size: 24px;"></i>
             </button>
             <div id="note-options" class="hidden items-center space-x-1 pl-1">
                 <button data-color="#FFFBEB" class="w-6 h-6 rounded-full bg-yellow-100 border-2 border-white" title="黃色便利貼"></button>
@@ -254,12 +257,12 @@
             </div>
 
             <button class="tool-btn p-3 rounded-lg hover:bg-gray-700" id="upload-image-btn" title="插入圖片 (I)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <i class="fas fa-image" style="font-size: 24px;"></i>
             </button>
             <input type="file" id="image-input" accept="image/*">
 
             <button class="tool-btn p-3 rounded-lg hover:bg-gray-700" id="upload-pdf-btn" title="插入PDF (F)">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <i class="fas fa-file-pdf" style="font-size: 24px;"></i>
             </button>
             <input type="file" id="pdf-input" accept=".pdf">
 
@@ -267,7 +270,7 @@
 
             <!-- Action Tools -->
              <button class="tool-btn p-3 rounded-lg hover:bg-gray-700" data-tool="delete" title="刪除選取 (Delete)">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                <i class="fas fa-trash" style="font-size: 24px;"></i>
             </button>
 
             <!-- Teacher Only Tools -->
